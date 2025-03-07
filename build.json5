@@ -1,0 +1,29 @@
+{
+    name: "librepaint3d",
+    language: "zig",
+    version: "0.0.1",
+    description: "FOSS Paint 3D Clone",
+    author: "VExcess <github.com/vexcess>",
+    modules: {
+        main: {
+            root: "src/main.zig",
+            dependencies: [
+                "zcanvas",
+                "vexlib"
+            ]
+        },
+        $importAll: [
+            {
+                local: "../zwebsuite/zcanvas",
+                remote: "https://github.com/zwebsuite/zcanvas"
+            },
+            {
+                local: "../zwebsuite/vexlib",
+                remote: "https://github.com/vExcess/zig-vexlib"
+            }
+        ]
+    },
+    build: {
+        default: ["main"]
+    }
+}
