@@ -2,8 +2,8 @@
 The free and open source replacement for MS Paint 3D
 
 ## About
-Microsoft is killing off Paint 3D. 
-> Paint 3D is deprecated and will be removed from the Microsoft Store on November 4, 2024. After that date, Paint 3D will no longer be available for download.
+Microsoft ~~is killing~~ has killed off Paint 3D. 
+> Paint 3D was removed from the Microsoft Store on November 4, 2024. Paint 3D is no longer available for download from Microsoft.
 
 [https://learn.microsoft.com/en-us/windows/whats-new/deprecated-features-resources#paint-3d](https://learn.microsoft.com/en-us/windows/whats-new/deprecated-features-resources#paint-3d)
 
