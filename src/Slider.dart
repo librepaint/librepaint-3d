@@ -1,9 +1,11 @@
-import './main.dart' show appScale;
 import 'package:drawlite/dl.dart';
 import 'package:drawlite/drawlite-touch.dart';
 
+import 'app-state.dart' show appScale;
+
 class Slider {
     late double x, y, width, start, stop, value;
+    bool pressed = false;
     
     Slider(double x, double y, double start, double stop, double value) {
         this.x = x;
@@ -14,23 +16,30 @@ class Slider {
         this.value = value;
     }
 
+    void setPressed(bool val) {
+        this.pressed = val;
+    }
+
+    bool hoveredOver(int mouseX, int mouseY) {
+        return point_rect(mouseX / appScale, mouseY / appScale, this.x, this.y - 12, this.width, 24);
+    }
+
     void render() {
         final GetObject(
             :mouseX,
-            :mouseY,
-            :mouseIsPressed
+            :mouseY
         ) = get;
 
-        var hoveredOver = point_rect(mouseX / appScale, mouseY / appScale, this.x, this.y - 12, this.width, 24);
+        final hovered = this.hoveredOver(mouseX, mouseY);
 
-        if (hoveredOver && mouseIsPressed) {
+        if (this.pressed) {
             this.value = map(mouseX / appScale, this.x, this.x + this.width, this.start, this.stop);
         }
 
         // slider base
         noStroke();
-        if (hoveredOver) {
-            if (mouseIsPressed) {
+        if (hovered) {
+            if (this.pressed) {
                 fill(145);
             } else {
                 fill(97);
@@ -47,8 +56,8 @@ class Slider {
         rect(this.x, this.y, mapValue * this.width, 4);
         
         // handle
-        if (hoveredOver) {
-            if (mouseIsPressed) {
+        if (hovered) {
+            if (this.pressed) {
                 fill(204);
             } else {
                 fill(23);

@@ -1,6 +1,6 @@
 import 'package:drawlite/drawlite.dart';
 import 'package:drawlite/dl.dart';
-import './main.dart' show appScale;
+import './librepaint3d.dart' show appScale;
 
 enum Icon {
     menu,

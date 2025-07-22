@@ -18,21 +18,35 @@ from Microsoft Paint 3D. LibrePaint 3D is not affiliated with Microsoft.
 
 ## Development
 #### Dependencies
-- jvbuild
-- Dart
+- [Dart](https://dart.dev/get-dart)
+- [jvbuild](https://github.com/vExcess/jvbuild)
 
-`sudo apt-get install build-essential libsdl2-dev libcairo2-dev libpango1.0-dev libpng-dev libjpeg-dev libgif-dev`
+Quick run:
+```
+jvbuild run dev
+```
 
-Run `jvbuild run` to run project.
-`dart run -r src/main.dart` to run dev
+Build:
+```
+jvbuild build
+```
+
+Package:
+```
+jvbuild build
+```
+
 
 ## Platform Support
-This app works on Windows and most Linux distros, but will not work on Mac.  
-[?] Windows  
-[✔] Debian-based Linux
-[?] Other Linux Distros  
-[X] MacOS (no support for you bourgeois Apple elitists)  
-
+| Platform  | Support |
+| ------------- | ------------- |
+| Debian-based Linux (Debian, Ubuntu, Mint, etc.) | Supported |
+| Fedora-based Linux | Support Planned |
+| Arch-based Linux   | Support Planned  |
+| Other Linux        | No Official Support, but the Flatpak will probably work |
+| Windows | Support Planned |
+| macOS   | No Support Planned  |
+| iOS     | No Support Planned  |
 
 # Todo
 Microsoft Paint 3D was presumably created by an entire team of highly skilled professional developers. LibrePaint 3D was created by a single teenager in his limited free time. Set your expectations accordingly. That is LibrePaint 3D, as open source software tends to be, is a bit crappier, but it will improve over time.

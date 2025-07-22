@@ -1,4 +1,4 @@
-import './main.dart' show appScale;
+import 'librepaint3d.dart' show appScale;
 import 'package:drawlite/dl.dart';
 import 'package:drawlite/drawlite-touch.dart';
 
