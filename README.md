@@ -11,15 +11,21 @@ This is unfortunate as Paint 3D is one of the best image editing softwares. Alth
 
 Because Microsoft is killing off Paint 3D and because I will be abandoning Windows on October 14, 2025 which is the end of life date for Windows 10 after which it will no longer receive security updates, I have resorted to programming my own open source Paint 3D.
 
+## Legal
 This project is a clean implementation of Microsoft's Paint 3D. No code from Microsoft
 Paint 3D was used in the creation of LibrePaint 3D. Although LibrePaint 3D was designed to have
 a similiar design and layout to Microsoft Paint 3D, none of LibrePaint 3D's assets are taken
 from Microsoft Paint 3D. LibrePaint 3D is not affiliated with Microsoft. 
 
+## Quality Disclaimer
+MS Paint 3D was presumably created by an entire team of professional developers. LibrePaint 3D was created by a singular teenager in his limited free time. Set your expectations accordingly. That is LibrePaint 3D, as open source software tends to be, is a bit crappier, but it will improve over time.
+
 ## Development
 #### Dependencies
-- [Dart](https://dart.dev/get-dart)
-- [jvbuild](https://github.com/vExcess/jvbuild)
+- [Dart](https://dart.dev/get-dart) - the programming language
+- [jvbuild](https://github.com/vExcess/jvbuild) - custom dependency manager, build system, and packaging tool
+
+Note: jvbuild currently doesn't install the dcanvas and drawlite dependencies locally. I'll fix that soon.
 
 Quick run:
 ```
@@ -33,7 +39,7 @@ jvbuild build
 
 Package:
 ```
-jvbuild build
+jvbuild package
 ```
 
 
@@ -49,9 +55,12 @@ jvbuild build
 | iOS     | No Support Planned  |
 
 # Todo
-Microsoft Paint 3D was presumably created by an entire team of highly skilled professional developers. LibrePaint 3D was created by a single teenager in his limited free time. Set your expectations accordingly. That is LibrePaint 3D, as open source software tends to be, is a bit crappier, but it will improve over time.
-- todo: basically everything
+- Implement Brushes (help plz)
+- Pretty much literally everything else
 
 ## Contributors
 - [vExcess](https://github.com/vExcess) - Primary Developer
 - [Virtuosa](https://www.khanacademy.org/profile/kaid_1077077685654678878412920/projects) - Graphics Designer
+
+## LibrePaint 3D running on Linux Mint:
+![screenshot](https://github.com/librepaint/librepaint-3d/blob/main/screenshot.png?raw=true)

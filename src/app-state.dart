@@ -1,6 +1,7 @@
 import 'package:drawlite/drawlite.dart'
     show Color, Drawlite, DLImage;
 
+import './ColorPicker.dart';
 import './brushes.dart';
 
 late Drawlite dl;
@@ -32,6 +33,8 @@ const SIDEBAR_WIDTH = 264;
 // current brush color
 Color currColor = brushColors[14];
 
+List<Color> customColors = [];
+
 // the librepaint canvas
 late DLImage paintCanvas;
 
@@ -39,3 +42,5 @@ late DLImage paintCanvas;
 int selectedMarker = 0;
 // stores the brush stroke currently being painted
 BrushStroke? currDrawStroke = null;
+
+ColorPicker? colorPicker = null;

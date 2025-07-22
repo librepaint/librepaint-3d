@@ -33,7 +33,7 @@ class Slider {
         final hovered = this.hoveredOver(mouseX, mouseY);
 
         if (this.pressed) {
-            this.value = map(mouseX / appScale, this.x, this.x + this.width, this.start, this.stop);
+            this.value = constrain(map(mouseX / appScale, this.x, this.x + this.width, this.start, this.stop), this.start, this.stop).toDouble();
         }
 
         // slider base

@@ -13,13 +13,10 @@ import './icons.dart';
 import './welcome-menu.dart';
 import './brushes.dart';
 import './sidebar.dart';
-import './ColorPicker.dart';
 
 import './app-state.dart';
 
 late SDLWindow window;
-
-ColorPicker colorPicker = new ColorPicker();
 
 void renderTopRowButtons() {
     final mouseX = get.mouseX;
@@ -222,7 +219,9 @@ void draw() {
     font("monospace", 16);
     text("FPS: ${frameRate().round()}", 3, height - 4);
 
-    // colorPicker.render();
+    if (colorPicker != null) {
+        colorPicker!.render();
+    }
 
     window.render();
 
@@ -236,12 +235,21 @@ void mousePressed(MouseEvent event) {
     final mouseX = get.mouseX;
     final mouseY = get.mouseY;
 
-    if (colorPicker.isMouseOver()) {
-        colorPicker.onClick();
+    if (colorPicker != null && colorPicker!.isMouseOver()) {
+        colorPicker!.onClick();
         return;
     }
     
-    var btnX = 0.0;
+    if (mouseX > sidebarX) {
+        if (sidebarPage is BrushesPage) {
+            brushesPage.thicknessSlider.setPressed(brushesPage.thicknessSlider.hoveredOver(get.mouseX, get.mouseY));
+            brushesPage.opacitySlider.setPressed(brushesPage.opacitySlider.hoveredOver(get.mouseX, get.mouseY));
+        }
+        sidebarPage.onClick();
+        return;
+    }
+    
+    var btnX = (68 + (lWidth - (4*68 + 48 + 8*68))) / 2;
     for (var i = 0; i < sidebarPageLabels.length; i++) {
         if (point_rect(mouseX / appScale, mouseY / appScale, btnX, 0, 68, 48)) {
             setSidebarPage(i);
@@ -251,11 +259,8 @@ void mousePressed(MouseEvent event) {
     }
 
     if (get.mouseX < sidebarX && get.mouseY > canvasAreaY) {
-        currDrawStroke = new BrushStroke(currColor, BrushesPage.thicknessSlider.value, selectedMarker);
+        currDrawStroke = new BrushStroke(currColor, brushesPage.thicknessSlider.value, selectedMarker);
     }
-
-    BrushesPage.thicknessSlider.setPressed(BrushesPage.thicknessSlider.hoveredOver(get.mouseX, get.mouseY));
-    BrushesPage.opacitySlider.setPressed(BrushesPage.opacitySlider.hoveredOver(get.mouseX, get.mouseY));
 }
 
 void mouseDragged(MouseEvent event) {
@@ -267,7 +272,9 @@ void mouseDragged(MouseEvent event) {
 }
 
 void mouseReleased(MouseEvent event) {
-    colorPicker.onMouseReleased();
+    if (colorPicker != null) {
+        colorPicker!.onMouseReleased();
+    }
 
     final mouseX = get.mouseX;
     final mouseY = get.mouseY;
@@ -291,8 +298,8 @@ void mouseReleased(MouseEvent event) {
     paintCanvas = snip(canvasX, canvasY, paintCanvas.width, paintCanvas.height);
     currDrawStroke = null;
 
-    BrushesPage.thicknessSlider.setPressed(false);
-    BrushesPage.opacitySlider.setPressed(false);
+    brushesPage.thicknessSlider.setPressed(false);
+    brushesPage.opacitySlider.setPressed(false);
 }
 
 var running = true;
