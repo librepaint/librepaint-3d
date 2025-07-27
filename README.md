@@ -55,8 +55,11 @@ jvbuild package
 | iOS     | No Support Planned  |
 
 # Todo
-- Implement Brushes (help plz)
-- Pretty much literally everything else
+- brushes (help plz)
+- color picker
+- text boxes
+- optimizations
+- everything
 
 ## Contributors
 - [vExcess](https://github.com/vExcess) - Primary Developer

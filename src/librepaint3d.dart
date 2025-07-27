@@ -128,6 +128,7 @@ void draw() {
         scale(appScale);
 
         // canvas area
+        noStroke();
         fill(190, 190, 190);
         rect(0, canvasAreaY, lWidth - SIDEBAR_WIDTH, lHeight - canvasAreaY);
 
@@ -236,16 +237,12 @@ void mousePressed(MouseEvent event) {
     final mouseY = get.mouseY;
 
     if (colorPicker != null && colorPicker!.isMouseOver()) {
-        colorPicker!.onClick();
+        colorPicker!.mousePressed();
         return;
     }
     
     if (mouseX > sidebarX) {
-        if (sidebarPage is BrushesPage) {
-            brushesPage.thicknessSlider.setPressed(brushesPage.thicknessSlider.hoveredOver(get.mouseX, get.mouseY));
-            brushesPage.opacitySlider.setPressed(brushesPage.opacitySlider.hoveredOver(get.mouseX, get.mouseY));
-        }
-        sidebarPage.onClick();
+        sidebarPage.mousePressed();
         return;
     }
     
@@ -264,6 +261,19 @@ void mousePressed(MouseEvent event) {
 }
 
 void mouseDragged(MouseEvent event) {
+    final mouseX = get.mouseX;
+    final mouseY = get.mouseY;
+
+    if (colorPicker != null && colorPicker!.isMouseOver()) {
+        colorPicker!.mouseDragged();
+        return;
+    }
+
+    if (mouseX > sidebarX) {
+        sidebarPage.mouseDragged();
+        return;
+    }
+
     if (currDrawStroke != null) {
         var points = currDrawStroke!.points;
         points.add(get.mouseX.toDouble());
@@ -300,6 +310,10 @@ void mouseReleased(MouseEvent event) {
 
     brushesPage.thicknessSlider.setPressed(false);
     brushesPage.opacitySlider.setPressed(false);
+}
+
+void keyPressed(KeyboardEvent event) {
+    sidebarPage.keyPressed(event);
 }
 
 var running = true;
@@ -365,4 +379,5 @@ Future<void> main() async {
     dl.mousePressed = mousePressed;
     dl.mouseDragged = mouseDragged;
     dl.mouseReleased = mouseReleased;
+    dl.keyPressed = keyPressed;
 }

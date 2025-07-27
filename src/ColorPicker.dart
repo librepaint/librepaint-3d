@@ -4,7 +4,8 @@ import 'package:drawlite/drawlite.dart'
 import 'package:drawlite/dl.dart';
 import 'package:drawlite/drawlite-touch.dart';
 
-import 'app-state.dart';
+import './TextBox.dart';
+import './app-state.dart';
 import './sidebar.dart'
     show sidebarCacheImg;
 
@@ -14,6 +15,20 @@ class ColorPicker {
     static final DRAG_WINDOW = 1;
     static final DRAG_SATURATION_BRIGHTNESS = 2;
     static final DRAG_HUE = 3;
+
+    static final boxLabels = [
+        "Red",
+        "Green",
+        "Blue",
+        "Hex",
+    ];
+
+    List<TextBox> textBoxes = [
+        new TextBox(0, 0, 80, 32, "", ""),
+        new TextBox(0, 0, 80, 32, "", ""),
+        new TextBox(0, 0, 80, 32, "", ""),
+        new TextBox(0, 0, 80, 32, "", ""),
+    ];
 
     int x = 0;
     int y = 0;
@@ -47,7 +62,7 @@ class ColorPicker {
         for (int i = 0; i < pickerImgData.data.length; i += 4) {
             final x = ((i / 4) % pickerBoxSz).toInt();
             final y = ((i / 4) / pickerBoxSz).toInt();
-            final clr = Color.HSBtoRGB(this.hue, x / pickerBoxSz * 100, y / pickerBoxSz * 100);
+            final clr = Color.HSBtoRGB(this.hue, x / pickerBoxSz * 100, (pickerBoxSz - y - 1) / pickerBoxSz * 100);
             pickerImgData.data[i] = clr[0];
             pickerImgData.data[i+1] = clr[1];
             pickerImgData.data[i+2] = clr[2];
@@ -74,13 +89,13 @@ class ColorPicker {
         return point_rect(get.mouseX, get.mouseY, this.x, this.y, this.width, this.height);
     }
 
-    void onClick() {
+    void mousePressed() {
         final pickerBoxX = this.x + 20;
         final pickerBoxY = this.y + 30 + 20;
         final hueSliderY = pickerBoxY + pickerBoxSz + 20;
 
         // grab faux window
-        if (get.mouseY < this.y + 40) {
+        if (get.mouseY >= this.y && get.mouseY < this.y + 40) {
             this.dragAction = DRAG_WINDOW;
             this.grabPointX = get.mouseX - this.x;
             this.grabPointY = get.mouseY - this.y;
@@ -128,6 +143,16 @@ class ColorPicker {
             colorPicker = null;
             return;
         }
+
+        for (final box in this.textBoxes) {
+            box.mousePressed();
+        }
+    }
+
+    void mouseDragged() {
+        for (final box in this.textBoxes) {
+            box.mouseDragged();
+        }
     }
 
     void onMouseReleased() {
@@ -154,7 +179,7 @@ class ColorPicker {
         // update saturation & brightness
         if (dragAction == DRAG_SATURATION_BRIGHTNESS) {
             this.saturation = constrain((get.mouseX - pickerBoxX) / pickerBoxSz * 100, 0, 100).toDouble();
-            this.brightness = constrain((get.mouseY - pickerBoxY) / pickerBoxSz * 100, 0, 100).toDouble();
+            this.brightness = constrain((pickerBoxY + pickerBoxSz - get.mouseY) / pickerBoxSz * 100, 0, 100).toDouble();
         }
 
         // update hue
@@ -163,7 +188,7 @@ class ColorPicker {
             for (int i = 0; i < pickerImgData.data.length; i += 4) {
                 final x = ((i / 4) % pickerBoxSz).toInt();
                 final y = ((i / 4) / pickerBoxSz).toInt();
-                final clr = Color.HSBtoRGB(this.hue, x / pickerBoxSz * 100, y / pickerBoxSz * 100);
+                final clr = Color.HSBtoRGB(this.hue, x / pickerBoxSz * 100, (pickerBoxSz - y - 1) / pickerBoxSz * 100);
                 pickerImgData.data[i] = clr[0];
                 pickerImgData.data[i+1] = clr[1];
                 pickerImgData.data[i+2] = clr[2];
@@ -186,11 +211,12 @@ class ColorPicker {
 
         //  saturation & brightness selector square
         final mappedSat = (this.saturation / 100 * pickerBoxSz).toInt();
-        final mappedBright = (this.brightness / 100 * pickerBoxSz).toInt();
+        final mappedBright = pickerBoxSz - (this.brightness / 100 * pickerBoxSz).toInt();
         sampleSquare(pickerBoxX + mappedSat, pickerBoxY + mappedBright, 24, 24, Color.fromHSB(this.hue, this.saturation, this.brightness));
         
         // color preview
-        rect(pickerBoxX + pickerBoxSz + 20, pickerBoxY, 80, 80);
+        final previewX = pickerBoxX + pickerBoxSz + 20;
+        rect(previewX, pickerBoxY, 80, 80);
 
         // buttons preamble
         final btnsY = hueSliderY + 32 + 20;
@@ -236,6 +262,27 @@ class ColorPicker {
             sampleSquare(pickerBoxX + mappedHue, hueSliderY + 16, 14, 24, Color.fromHSB(this.hue, 100, 100));
         } else {
             sampleSquare(pickerBoxX + mappedHue, hueSliderY + 16, 14, 30, Color.fromHSB(this.hue, 100, 100));
+        }
+
+        final rgbClr = Color.fromHSB(hue, saturation, brightness);
+        List<String> rgb = [rgbClr.r.toString(), rgbClr.g.toString(), rgbClr.b.toString(), rgbClr.toHex()];
+        
+        double y = pickerBoxY + 80 - 32 + 32 + 40;
+        for (int i = 0; i < boxLabels.length; i++) {
+            final label = boxLabels[i];
+            var numBox = textBoxes[i];
+
+            fill(0);
+            textAlign(BASELINE);
+            textSize(14);
+            text(label, previewX, y - 10);
+
+            numBox.x = previewX.toDouble();
+            numBox.y = y;
+            numBox.value = rgb[i].toString();
+            numBox.render();
+
+            y += 32 + 41;
         }
     }
 }

@@ -6,7 +6,7 @@ import 'package:drawlite/drawlite-touch.dart';
 import './icons.dart';
 import './brushes.dart';
 import './Slider.dart';
-import './NumberBox.dart';
+import './TextBox.dart';
 
 import './app-state.dart';
 import 'ColorPicker.dart';
@@ -75,27 +75,21 @@ void renderSideBar() {
 class SidebarPage {
     bool initialized = false;
 
-    void init() {
-        throw "SidebarPage.init must be implemented by child";   
-    }
-
-    void onClick() {
-
-    }
-
-    void render(int mouseX, int mouseY) {
-        throw "SidebarPage.render must be implemented by child";
-    }
+    void init() {}
+    void mousePressed() {}
+    void mouseDragged() {}
+    void keyPressed(KeyboardEvent event) {}
+    void render(int mouseX, int mouseY) {}
 }
 
 class BrushesPage extends SidebarPage {
     bool loadedMarkerGraphics = false;
 
     late Slider thicknessSlider;
-    late NumberBox thicknessNumberBox;
+    late TextBox thicknessNumberBox;
 
     late Slider opacitySlider;
-    late NumberBox opacityNumberBox;
+    late TextBox opacityNumberBox;
 
     void init() {
         if (!loadedMarkerGraphics) {
@@ -111,23 +105,26 @@ class BrushesPage extends SidebarPage {
         }
 
         thicknessSlider = new Slider(lWidth - SIDEBAR_WIDTH + 24, 328, 1, 100, 5);
-        thicknessNumberBox = new NumberBox(
+        thicknessNumberBox = new TextBox(
             lWidth - SIDEBAR_WIDTH + 154, 277, 85, 32,
-            5, "px"
+            "5", "px"
         );
 
-        opacitySlider = new Slider(lHeight - SIDEBAR_WIDTH + 24, 328+80, 1, 100, 50);
-        opacityNumberBox = new NumberBox(
+        opacitySlider = new Slider(lHeight - SIDEBAR_WIDTH + 24, 328+80, 1, 100, 100);
+        opacityNumberBox = new TextBox(
             lWidth - SIDEBAR_WIDTH + 154, 277+80, 85, 32,
-            100, "%"
+            "100", "%"
         );
 
         initialized = true;
     }
 
-    void onClick() {
+    void mousePressed() {
         final mouseX = get.mouseX;
         final mouseY = get.mouseY;
+
+        brushesPage.thicknessSlider.setPressed(brushesPage.thicknessSlider.hoveredOver(get.mouseX, get.mouseY));
+        brushesPage.opacitySlider.setPressed(brushesPage.opacitySlider.hoveredOver(get.mouseX, get.mouseY));
 
         // change of brush
         for (var xi = 0; xi < 5; xi++) {
@@ -182,6 +179,19 @@ class BrushesPage extends SidebarPage {
                 colorPicker = new ColorPicker(-1);
             }
         }
+
+        thicknessNumberBox.mousePressed();
+        opacityNumberBox.mousePressed();
+    }
+
+    void mouseDragged() {
+        thicknessNumberBox.mouseDragged();
+        opacityNumberBox.mouseDragged();   
+    }
+
+    void keyPressed(KeyboardEvent event) {
+        thicknessNumberBox.keyPressed(event);
+        opacityNumberBox.keyPressed(event);
     }
 
     void render(int mouseX, int mouseY) {
@@ -235,14 +245,17 @@ class BrushesPage extends SidebarPage {
         text("Opacity", sidebarX + 26, 380);
 
         thicknessSlider.x = sidebarX + 24;
-        opacitySlider.x = sidebarX + 24;
         thicknessSlider.render();
+
+        opacitySlider.x = sidebarX + 24;
         opacitySlider.render();
 
         thicknessNumberBox.x = sidebarX + 154;
-        thicknessNumberBox.value = thicknessSlider.value.round();
-        opacityNumberBox.x = sidebarX + 154;
+        thicknessNumberBox.value = thicknessSlider.value.round().toString();
         thicknessNumberBox.render();
+
+        opacityNumberBox.x = sidebarX + 154;
+        opacityNumberBox.value = opacitySlider.value.round().toString();
         opacityNumberBox.render();
 
         // divider
@@ -353,49 +366,7 @@ class BrushesPage extends SidebarPage {
 }
 
 class CanvasPage extends SidebarPage {
-    bool loadedMarkerGraphics = false;
-
-    late Slider thicknessSlider;
-    late NumberBox thicknessNumberBox;
-
-    late Slider opacitySlider;
-    late NumberBox opacityNumberBox;
-
-    void init() {
-        if (!loadedMarkerGraphics) {
-            loadMarkerGradient();
-            loadCaligraphyPen();
-            loadOilBrush();
-            loadPixelPen();
-            loadPencil();
-            loadCrayon();
-            loadSprayCan();
-            loadPaintCan();
-            loadedMarkerGraphics = true;
-        }
-
-        thicknessSlider = new Slider(lWidth - SIDEBAR_WIDTH + 24, 328, 1, 100, 5);
-        thicknessNumberBox = new NumberBox(
-            lWidth - SIDEBAR_WIDTH + 154, 277, 85, 32,
-            5, "px"
-        );
-
-        opacitySlider = new Slider(lHeight - SIDEBAR_WIDTH + 24, 328+80, 1, 100, 50);
-        opacityNumberBox = new NumberBox(
-            lWidth - SIDEBAR_WIDTH + 154, 277+80, 85, 32,
-            100, "%"
-        );
-
-        initialized = true;
-    }
-
-    void onClick() {
-
-    }
-
-    void render(int mouseX, int mouseY) {
-
-    }
+ 
 }
 
 
