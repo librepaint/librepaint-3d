@@ -1,29 +1,39 @@
 {
-    name: "librepaint3d",
-    language: "zig",
-    version: "0.0.1",
+    name: "LibrePaint 3D",
     description: "FOSS Paint 3D Clone",
     author: "VExcess <github.com/vexcess>",
+    repository: "https://github.com/librepaint/librepaint-3d",
+
+    genericName: "Paint Program",
+    icon: "assets/logo.png",
+    categories: ["Graphics", "2DGraphics", "3DGraphics", "RasterGraphics"],
+    mimeType: ["image/jpeg", "image/png", "image/webp", "image/bmp", "image/tiff"],
+
     modules: {
-        main: {
-            root: "src/main.zig",
+        librepaint3d: {
+            root: "src/librepaint3d.dart",
+            version: "1.0.1",
             dependencies: [
-                "zcanvas",
-                "vexlib"
+                "image",
+                "drawlite_dart",
             ]
         },
-        $importAll: [
-            {
-                local: "../zwebsuite/zcanvas",
-                remote: "https://github.com/zwebsuite/zcanvas"
-            },
-            {
-                local: "../zwebsuite/vexlib",
-                remote: "https://github.com/vExcess/zig-vexlib"
-            }
-        ]
+
+        image: {
+            type: "dart:lib",
+            version: "^4.5.2"
+        },
+
+        // import drawlite + deps
+        $importAll: [{
+            local: "../drawlite",
+            remote: "https://github.com/librepaint/drawlite"
+        }]
     },
-    build: {
-        default: ["main"]
+
+    default: "librepaint3d",
+
+    run: {
+        dev: "dart run -r src/librepaint3d.dart"
     }
 }

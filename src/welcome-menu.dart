@@ -2,7 +2,8 @@ import 'package:drawlite/drawlite.dart';
 import 'package:drawlite/dl.dart';
 import 'package:drawlite/drawlite-touch.dart';
 import 'icons.dart';
-import './main.dart' show appScale;
+
+import 'app-state.dart' show appScale;
 
 void welcomeMenu() {
     final lWidth = get.width / appScale;
