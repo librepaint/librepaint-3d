@@ -1,7 +1,7 @@
-import 'package:drawlite/drawlite.dart'
+import 'package:drawlite_dart/drawlite.dart'
     show Color, Drawlite, Event, KeyboardEvent, MouseEvent, QuitEvent, DLImage;
-import 'package:drawlite/dl.dart';
-import 'package:drawlite/drawlite-touch.dart';
+import 'package:drawlite_dart/dl.dart';
+import 'package:drawlite_dart/drawlite-touch.dart';
 
 import './icons.dart';
 import './brushes.dart';

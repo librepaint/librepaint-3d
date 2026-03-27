@@ -2,7 +2,7 @@
     name: "LibrePaint 3D",
     description: "FOSS Paint 3D Clone",
     author: "VExcess <github.com/vexcess>",
-    repository: "https://github.com/librepaint/librepaint-3d",
+    repository: "https://github.com/microslop-mirror/librepaint-3d",
 
     genericName: "Paint Program",
     icon: "assets/logo.png",
@@ -12,7 +12,7 @@
     modules: {
         librepaint3d: {
             root: "src/librepaint3d.dart",
-            version: "1.0.1",
+            version: "0.0.1",
             dependencies: [
                 "image",
                 "drawlite_dart",
@@ -27,7 +27,7 @@
         // import drawlite + deps
         $importAll: [{
             local: "../drawlite",
-            remote: "https://github.com/librepaint/drawlite"
+            remote: "https://github.com/microslop-mirror/drawlite"
         }]
     },
 

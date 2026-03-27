@@ -1,4 +1,4 @@
-import 'package:drawlite/drawlite.dart'
+import 'package:drawlite_dart/drawlite.dart'
     show Color, Drawlite, DLImage;
 
 import './ColorPicker.dart';

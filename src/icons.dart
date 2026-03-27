@@ -1,5 +1,5 @@
-import 'package:drawlite/drawlite.dart';
-import 'package:drawlite/dl.dart';
+import 'package:drawlite_dart/drawlite.dart';
+import 'package:drawlite_dart/dl.dart';
 import './app-state.dart' show appScale;
 
 enum Icon {

@@ -1,5 +1,5 @@
-import 'package:drawlite/dl.dart';
-import 'package:drawlite/drawlite-touch.dart';
+import 'package:drawlite_dart/dl.dart';
+import 'package:drawlite_dart/drawlite-touch.dart';
 
 import 'app-state.dart' show appScale;
 

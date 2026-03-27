@@ -1,7 +1,8 @@
 build
-.dart_tool/
+.dart_tool
 pubspec.lock
 pubspec.yaml
+jvbuild-out
 
 # Dependency directories
 node_modules/

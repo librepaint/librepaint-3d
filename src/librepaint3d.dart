@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:drawlite/drawlite.dart'
+import 'package:drawlite_dart/drawlite.dart'
     show Drawlite, Event, KeyboardEvent, MouseEvent, QuitEvent;
-import 'package:drawlite/dl.dart';
-import 'package:drawlite/drawlite-touch.dart';
+import 'package:drawlite_dart/dl.dart';
+import 'package:drawlite_dart/drawlite-touch.dart';
 
 import 'package:dcanvas/dcanvas.dart';
 import 'package:dcanvas/backend/Window.dart';

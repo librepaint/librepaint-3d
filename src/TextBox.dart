@@ -1,8 +1,8 @@
 import './app-state.dart' show appScale;
-import 'package:drawlite/drawlite.dart'
+import 'package:drawlite_dart/drawlite.dart'
     show Color, Drawlite, Event, KeyboardEvent, MouseEvent, QuitEvent, DLImage;
-import 'package:drawlite/dl.dart';
-import 'package:drawlite/drawlite-touch.dart';
+import 'package:drawlite_dart/dl.dart';
+import 'package:drawlite_dart/drawlite-touch.dart';
 
 class TextBox {
     late double x, y, width, height;
@@ -145,7 +145,7 @@ class TextBox {
         }
     }
 
-    void render () {
+    void render() {
         // box
         rectMode(CORNER);
         strokeWeight(1);

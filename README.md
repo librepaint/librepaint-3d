@@ -25,8 +25,6 @@ MS Paint 3D was presumably created by an entire team of professional developers.
 - [Dart](https://dart.dev/get-dart) - the programming language
 - [jvbuild](https://github.com/vExcess/jvbuild) - custom dependency manager, build system, and packaging tool
 
-Note: jvbuild currently doesn't install the dcanvas and drawlite dependencies locally. I'll fix that soon.
-
 Quick run:
 ```
 jvbuild run dev
@@ -66,4 +64,4 @@ jvbuild package
 - [Virtuosa](https://www.khanacademy.org/profile/kaid_1077077685654678878412920/projects) - Graphics Designer
 
 ## LibrePaint 3D running on Linux Mint:
-![screenshot](https://github.com/librepaint/librepaint-3d/blob/main/screenshot.png?raw=true)
+![screenshot](https://github.com/microslop-mirror/librepaint-3d/blob/main/screenshot.png?raw=true)
